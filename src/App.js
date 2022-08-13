@@ -1,4 +1,5 @@
 import Weather from "./Weather";
+import Sign from "./Sign";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -15,7 +16,10 @@ function App() {
 
   return (
     <div className="App">
-      <Weather weather={weather} />
+      <div className="WeatherApp">
+        <Weather weather={weather} />
+      </div>
+      <Sign />
     </div>
   );
 }
