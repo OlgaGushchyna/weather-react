@@ -1,0 +1,33 @@
+.Cities {
+  margin-left: -5px;
+}
+.Cities span {
+  margin-left: 10px;
+}
+
+.city:hover {
+  cursor: pointer;
+}
+
+.ShowTemp .temperature img {
+  margin-right: 5px;
+  height: 64px;
+  width: 64px;
+}
+.ShowTemp .temperature strong {
+  color: rgb(33, 33, 33);
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.ShowTemp .temperature .active {
+  color: rgb(33, 33, 33);
+  text-decoration: none;
+  cursor: default;
+}
+
+.ShowTemp .units {
+  position: relative;
+  top: -34px;
+}
