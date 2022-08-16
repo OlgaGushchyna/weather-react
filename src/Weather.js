@@ -6,6 +6,7 @@ import "./Weather.css";
 export default function Weather(props) {
   console.log(props);
   const [city, setCity] = useState(props.weather.city);
+
   useEffect(() => {
     searchCity();
   }, [city]);
