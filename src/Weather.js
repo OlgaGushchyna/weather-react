@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ShowCityInfo from "./ShowCityInfo";
 import axios from "axios";
 import "./Weather.css";
 
 export default function Weather(props) {
   console.log(props);
-  const [city, setCity] = useState(null);
+  const [city, setCity] = useState(props.weather.city);
+  useEffect(() => {
+    searchCity();
+  }, [city]);
+
   let [weather, setWeather] = useState({
     city: props.weather.city,
     timedata: new Date(props.weather.timedata * 1000),
@@ -31,15 +35,15 @@ export default function Weather(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    search();
+    setCity(event.target[0].value);
   }
 
-  function handleCityChange(event) {
+  function defaultCity(event) {
     event.preventDefault();
-    setCity(event.target.value);
+    setCity(event.currentTarget.innerText);
   }
 
-  function search() {
+  function searchCity() {
     const apiKey = "8de23b651e5e3f370c28643f6fc1640b";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
@@ -48,10 +52,22 @@ export default function Weather(props) {
   return (
     <div className="Weather">
       <span className="Cities">
-        <span className="city text-primary">Lisbon</span>
-        <span className="city text-primary">Paris</span>
-        <span className="city text-primary">Sydney</span>
-        <span className="city text-primary">San Francisco</span>
+        <span
+          className="city text-primary"
+          onClick={defaultCity}
+          value="Lisbon"
+        >
+          Lisbon
+        </span>
+        <span className="city text-primary" onClick={defaultCity}>
+          Paris
+        </span>
+        <span className="city text-primary" onClick={defaultCity}>
+          Sydney
+        </span>
+        <span className="city text-primary" onClick={defaultCity}>
+          San Francisco
+        </span>
       </span>
 
       <form onSubmit={handleSubmit} className="row mb-3 mt-3">
@@ -62,7 +78,6 @@ export default function Weather(props) {
             autoFocus="on"
             autoComplete="off"
             className="form-control shadow-sm"
-            onChange={handleCityChange}
           />
         </div>
         <div className="col-3">
@@ -81,6 +96,7 @@ export default function Weather(props) {
           />
         </div>
       </form>
+
       <ShowCityInfo data={weather} />
     </div>
   );
