@@ -2,7 +2,7 @@ import "./Sign.css";
 
 export default function Sign() {
   return (
-    <div class="Sing">
+    <div className="Sing">
       <a
         href="https://github.com/OlgaGushchyna/weather-react"
         target="_blank"
