@@ -9,10 +9,9 @@
   cursor: pointer;
 }
 
-.ShowTemp .temperature img {
-  margin-right: 5px;
-  height: 64px;
-  width: 64px;
+.ShowTemp .temperature canvas {
+  margin-right: 10px;
+  margin-top: 5px;
 }
 .ShowTemp .temperature strong {
   color: rgb(33, 33, 33);

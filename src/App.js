@@ -16,7 +16,7 @@ export default function App() {
       description: responce.data.weather[0].description,
       humidity: responce.data.main.humidity,
       wind: responce.data.wind.speed,
-      icon: `http://openweathermap.org/img/wn/${responce.data.weather[0].icon}@2x.png`,
+      icon: responce.data.weather[0].icon,
       load: true,
     });
   }
