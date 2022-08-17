@@ -21,7 +21,7 @@ export default function ShowCityInfo(props) {
         <div className="col-6">
           <div className="clearfix temperature">
             <div className="float-start">
-              <WeatherIcon data={props.data.icon} />
+              <WeatherIcon data={props.data.icon} size={52} />
             </div>
             <div className="float-start">
               <WeatherTemperature data={props.data.temperature} />

@@ -7,16 +7,17 @@ import "./App.css";
 
 export default function App() {
   let [weather, setWeather] = useState({ load: false });
-  function showTemperature(responce) {
-    console.log(responce);
+  function showTemperature(response) {
+    console.log(response);
     setWeather({
-      city: responce.data.name,
-      timedata: responce.data.dt,
-      temperature: responce.data.main.temp,
-      description: responce.data.weather[0].description,
-      humidity: responce.data.main.humidity,
-      wind: responce.data.wind.speed,
-      icon: responce.data.weather[0].icon,
+      city: response.data.name,
+      coord: response.data.coord,
+      timedata: response.data.dt,
+      temperature: response.data.main.temp,
+      description: response.data.weather[0].description,
+      humidity: response.data.main.humidity,
+      wind: response.data.wind.speed,
+      icon: response.data.weather[0].icon,
       load: true,
     });
   }

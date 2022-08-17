@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import ShowCityInfo from "./ShowCityInfo";
+import WeatherForcast from "./WeatherForecast";
 import axios from "axios";
 import "./Weather.css";
 
 export default function Weather(props) {
   console.log(props);
+  const apiKey = "8de23b651e5e3f370c28643f6fc1640b";
   const [city, setCity] = useState(props.weather.city);
 
   useEffect(() => {
@@ -13,6 +15,7 @@ export default function Weather(props) {
 
   let [weather, setWeather] = useState({
     city: props.weather.city,
+    coord: props.weather.coord,
     timedata: new Date(props.weather.timedata * 1000),
     temperature: props.weather.temperature,
     description: props.weather.description,
@@ -23,7 +26,7 @@ export default function Weather(props) {
 
   function handleResponse(response) {
     setWeather({
-      coordinates: response.data.coord,
+      coord: response.data.coord,
       temperature: response.data.main.temp,
       humidity: response.data.main.humidity,
       timedata: new Date(response.data.dt * 1000),
@@ -36,7 +39,24 @@ export default function Weather(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setCity(event.target[0].value);
+
+    if (event.target[0].value === "") {
+      alert("Enter the city name...");
+    } else {
+      setCity(event.target[0].value);
+    }
+  }
+
+  function geolocationClick(event) {
+    event.preventDefault();
+    function showPosition(position) {
+      let lat = position.coords.latitude;
+      let long = position.coords.longitude;
+      let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
+      axios.get(apiUrl).then(handleResponse);
+      console.log(apiUrl);
+    }
+    navigator.geolocation.getCurrentPosition(showPosition);
   }
 
   function defaultCity(event) {
@@ -45,7 +65,6 @@ export default function Weather(props) {
   }
 
   function searchCity() {
-    const apiKey = "8de23b651e5e3f370c28643f6fc1640b";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
   }
@@ -94,11 +113,13 @@ export default function Weather(props) {
             value="Current"
             name="place"
             className="form-control btn btn-success shadow-sm"
+            onClick={geolocationClick}
           />
         </div>
       </form>
 
       <ShowCityInfo data={weather} />
+      <WeatherForcast coord={weather.coord} />
     </div>
   );
 }
