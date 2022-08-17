@@ -4,6 +4,10 @@ import WeatherIcon from "./WeatherIcon";
 import WeatherTemperature from "./WeatherTemperature";
 
 export default function ShowCityInfo(props) {
+  function updateUnits(evt) {
+    props.func(evt);
+  }
+
   return (
     <div className="ShowCityInfo">
       <h1>{props.data.city} </h1>
@@ -24,7 +28,10 @@ export default function ShowCityInfo(props) {
               <WeatherIcon data={props.data.icon} size={52} />
             </div>
             <div className="float-start">
-              <WeatherTemperature data={props.data.temperature} />
+              <WeatherTemperature
+                data={props.data.temperature}
+                func={updateUnits}
+              />
             </div>
           </div>
         </div>

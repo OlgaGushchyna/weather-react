@@ -5,9 +5,13 @@ import axios from "axios";
 import "./Weather.css";
 
 export default function Weather(props) {
-  console.log(props);
   const apiKey = "8de23b651e5e3f370c28643f6fc1640b";
   const [city, setCity] = useState(props.weather.city);
+  let [units, setUnits] = useState("metric");
+
+  function updateUnits(evt) {
+    setUnits(evt);
+  }
 
   useEffect(() => {
     searchCity();
@@ -39,7 +43,6 @@ export default function Weather(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-
     if (event.target[0].value === "") {
       alert("Enter the city name...");
     } else {
@@ -54,7 +57,6 @@ export default function Weather(props) {
       let long = position.coords.longitude;
       let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
       axios.get(apiUrl).then(handleResponse);
-      console.log(apiUrl);
     }
     navigator.geolocation.getCurrentPosition(showPosition);
   }
@@ -118,8 +120,11 @@ export default function Weather(props) {
         </div>
       </form>
 
-      <ShowCityInfo data={weather} />
-      <WeatherForcast coord={weather.coord} />
+      <ShowCityInfo data={weather} func={updateUnits} />
+
+      <div className="mt-3 mb-2">
+        <WeatherForcast coord={weather.coord} units={units} />
+      </div>
     </div>
   );
 }
