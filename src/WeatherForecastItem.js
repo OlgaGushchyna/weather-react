@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import WeatherIcon from "./WeatherIcon";
+import "./WeatherForecastItem.css";
 
 export default function WeatherForecastItem(props) {
   let [units, setUnits] = useState(props.units);
@@ -35,7 +36,7 @@ export default function WeatherForecastItem(props) {
 
   if (units === "metric") {
     return (
-      <div>
+      <div className="WeatherForecast-item">
         <div className="WeatherForecast-day">{setDay()}</div>
         <WeatherIcon data={props.data.weather[0].icon} size={36} />
         <div className="WeatherForecast-temperature">
@@ -50,7 +51,7 @@ export default function WeatherForecastItem(props) {
     );
   } else {
     return (
-      <div>
+      <div className="WeatherForecast-item">
         <div className="WeatherForecast-day">{setDay()}</div>
         <WeatherIcon data={props.data.weather[0].icon} size={36} />
         <div className="WeatherForecast-temperature">

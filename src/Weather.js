@@ -122,7 +122,7 @@ export default function Weather(props) {
 
       <ShowCityInfo data={weather} func={updateUnits} />
 
-      <div className="mt-3 mb-2">
+      <div className="mt-3 mb-3">
         <WeatherForcast coord={weather.coord} units={units} />
       </div>
     </div>

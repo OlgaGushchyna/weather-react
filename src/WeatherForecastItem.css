@@ -1,0 +1,11 @@
+.WeatherForecast-item {
+  border: 1px solid #dadde1;
+  border-radius: 10px;
+  padding: 7px;
+}
+
+.WeatherForecast-item:hover {
+  background-color: #edf1f6;
+  width: 110%;
+  font-size: 15px;
+}
