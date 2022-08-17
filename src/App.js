@@ -8,7 +8,6 @@ import "./App.css";
 export default function App() {
   let [weather, setWeather] = useState({ load: false });
   function showTemperature(response) {
-    console.log(response);
     setWeather({
       city: response.data.name,
       coord: response.data.coord,
@@ -39,7 +38,6 @@ export default function App() {
       let long = position.coords.longitude;
       let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
       axios.get(apiUrl).then(showTemperature);
-      console.log(apiUrl);
     }
     navigator.geolocation.getCurrentPosition(showPosition);
 
